@@ -105,42 +105,82 @@ sub get_user_usage {
 
 Get a list of all submissions for all forms on this account. The answers array has the submission data. Created_at is the date of the submission.
 
+XXXPARAMS
+
 =cut
 
 sub get_user_submissions {
 	my $self = shift;
 	return $self->_get("user/submissions");
 }
+=head2 get_user_subusers
+
+Get a list of sub users for this accounts and list of forms and form folders with access privileges.
+=cut
 
 sub get_user_subusers {
 	my $self = shift;
 	return $self->_get("user/subusers");
 }
 
+=head2 get_user_folders
+
+Get a list of form folders for this account. Returns name of the folder and owner of the folder for shared folders.
+
+=cut
+
 sub get_user_folders {
 	my $self = shift;
 	return $self->_get("user/folders");
 }
 
+=head2 get_user_reports
+
+List of URLS for reports in this account. Includes reports for all of the forms. ie. Excel, CSV, printable charts, embeddable HTML tables.
+
+=cut
 sub get_user_reports {
 	my $self = shift;
 	return $self->_get("user/reports");
 }
+=head2 get_user_logout
 
+Logout user
+
+=cut
 sub get_user_logout {
 	my $self = shift;
 	return $self->_get("user/logout");
 }
 
+=head2 get_user_settings
+
+Get user's time zone and language.
+
+=cut
 sub get_user_settings {
 	my $self = shift;
 	return $self->_get("user/settings");
 }
 
+=head2 get_user_history
+
+Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.
+
+=cut
+
 sub get_user_history {
 	my ($self, $params) = @_;
 	return $self->_get("user/history", $params);
 }
+
+=head2 get_user_forms
+
+Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.
+
+XXXParams
+
+=cut
 
 sub get_user_forms {
 	my ($self, $params) = @_;
