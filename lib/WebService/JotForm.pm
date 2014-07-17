@@ -76,7 +76,9 @@ sub BUILD {
 
 =head1 METHODS
 
-=head2 get_user
+=item B<get_user()>
+
+	$jotform->get_user();
 
 Get user account details for this JotForm user. Including user account type, avatar URL, name, email, website URL and account limits.
 
@@ -90,7 +92,9 @@ sub get_user {
 	return $self->_get("user");
 }
 
-=head2 get_user_usage
+=item B<get_user_usage()>
+
+	$jotform->get_user_usage();
 
 Get number of form submissions received this month. Also, get number of SSL form submissions, payment form submissions and upload space used by user.
 
@@ -101,7 +105,9 @@ sub get_user_usage {
 	return $self->_get("user/usage");
 }
 
-=head2 get_user_submissions
+=item B<get_user_submissions($params)>
+
+	$jotform->get_user_submissions($params);
 
 Get a list of all submissions for all forms on this account. The answers array has the submission data. Created_at is the date of the submission.
 
@@ -113,7 +119,9 @@ sub get_user_submissions {
 	my $self = shift;
 	return $self->_get("user/submissions");
 }
-=head2 get_user_subusers
+=item B<get_user_subusers()>
+
+	$jotform->get_user_subusers();
 
 Get a list of sub users for this accounts and list of forms and form folders with access privileges.
 =cut
@@ -123,7 +131,9 @@ sub get_user_subusers {
 	return $self->_get("user/subusers");
 }
 
-=head2 get_user_folders
+=item B<get_user_folders()>
+
+	$jotform->get_user_folders();
 
 Get a list of form folders for this account. Returns name of the folder and owner of the folder for shared folders.
 
@@ -134,7 +144,9 @@ sub get_user_folders {
 	return $self->_get("user/folders");
 }
 
-=head2 get_user_reports
+=item B<get_user_reports()>
+	
+	$jotform->get_user_reports();
 
 List of URLS for reports in this account. Includes reports for all of the forms. ie. Excel, CSV, printable charts, embeddable HTML tables.
 
@@ -143,7 +155,9 @@ sub get_user_reports {
 	my $self = shift;
 	return $self->_get("user/reports");
 }
-=head2 get_user_logout
+=item B<get_user_logout()>
+
+	$jotform->get_user_logout();
 
 Logout user
 
@@ -153,7 +167,9 @@ sub get_user_logout {
 	return $self->_get("user/logout");
 }
 
-=head2 get_user_settings
+=item B<get_user_settings()>
+
+	$jotform->get_user_settings();
 
 Get user's time zone and language.
 
@@ -163,7 +179,9 @@ sub get_user_settings {
 	return $self->_get("user/settings");
 }
 
-=head2 get_user_history
+=item B<get_user_history()>
+
+	$jotform->get_user_history();
 
 Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.
 
@@ -174,7 +192,10 @@ sub get_user_history {
 	return $self->_get("user/history", $params);
 }
 
-=head2 get_user_forms
+=item B<get_user_forms($params)>
+
+	$jotform->get_user_forms($params);
+
 
 Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.
 
@@ -187,6 +208,13 @@ sub get_user_forms {
 	return $self->_get("user/forms", $params);
 }
 
+=item B<get_form($id)>
+
+	$jotform->get_form($id);
+
+Get basic information about a form. Use get_form_questions($id) to get the list of questions.
+
+=cut
 
 sub get_form {
 	my ($self, $form_id) = @_;
@@ -194,17 +222,43 @@ sub get_form {
 	return $self->_get("form/$form_id");
 }
 
+=item B<get_form_questions($id)>
+	
+	$jotform->get_form_questions($id);
+
+	Get a list of all questions on a form. Type describes question field type. Order is the question order in the form. Text field is the question label.
+
+=cut
+
 sub get_form_questions {
 	my ($self, $form_id) = @_;
 	croak "No form id provided to get_form_questions" if !$form_id;
 	return $self->_get("form/$form_id/questions");
 }
 
+=item B<get_form_question($form_id, $qid)>
+	
+	$jotform->get_form_question($form_id, $qid);
+
+	Get Details About a Question
+
+=cut
+
 sub get_form_question {
 	my ($self, $form_id, $qid) = @_;
 	croak "Get_form_question requires both a form_id and question id" if !$form_id && $qid;
 	return $self->_get("form/$form_id/question/$qid");
 }
+
+=item B<get_form_properties($id,$key)>
+
+	$jotform->get_form_properties($id);
+	
+	$jotform->get_form_properties($id,$key);
+
+	Get a list of all properties on a form.
+
+=cut
 
 sub get_form_properties {
 	my ($self, $form_id, $key) = @_;
@@ -217,17 +271,42 @@ sub get_form_properties {
 	}
 }
 
+=item B<get_form_reports($id)>
+
+	$jotform->getFormReports($id);
+
+	Get all the reports of a specific form.
+
+=cut
+
 sub get_form_reports {
 	my ($self, $form_id) = @_;
 	croak "No form id provided to get_form_reports" if !$form_id;
 	return $self->_get("form/$form_id/reports"); 
 }
 
+=item B<(get_form_files($id)>
+
+	$jotform->get_form_files($id);
+
+	List of files uploaded on a form. Here is how you can access a particular file: http://www.jotform.com/uploads/{username}/{form-id}/{submission-id}/{file-name}. Size and file type is also included.
+
+=cut
+
+
 sub get_form_files {
 	my ($self, $form_id) = @_;
 	croak "No form id provided to get_form_files" if !$form_id;
 	return $self->_get("form/$form_id/files"); 
 }
+=item B<get_form_webhooks($id)>
+
+	$jotform->get_form_webhooks($id)
+
+	Webhooks can be used to send form submission data as an instant notification. Returns list of webhooks for this form.
+
+=cut
+
 
 sub get_form_webhooks {
 	my ($self, $form_id) = @_;
@@ -235,11 +314,29 @@ sub get_form_webhooks {
 	return $self->_get("form/$form_id/webhooks"); 
 }
 
+=item B<get_form_submissions($id)>
+
+	$jotform->get_form_submissions($id, $params);
+
+	List of form reponses. Fields array has the submitted data. Created_at is the date of the submission.
+
+=cut
+
+
 sub get_form_submissions {
 	my ($self, $form_id, $params) = @_;
 	croak "No form id provided to get_form_submissions" if !$form_id;
 	return $self->_get("form/$form_id/submissions"); 
 }
+
+=item B<get_submission($id)>
+
+	$jotform->get_submission($id);
+
+	Similar to get_form_submissions($id) But only get a single submission, based on submission id
+
+=cut
+
 
 sub get_submission {
 	my ($self, $sub_id) = @_;
@@ -247,11 +344,27 @@ sub get_submission {
 	return $self->_get("form/submission/$sub_id"); 
 }
 
+=item B<get_report($id)>
+
+	$jotform->get_report($id);
+
+	Get more information about a data report.
+=cut
+
+
 sub get_report {
 	my ($self, $rep_id) = @_;
 	croak "No report id provided to get_report" if !$rep_id;
 	return $self->_get("form/submission/$rep_id"); 
 }
+
+=item B<get_folder_id($id)>
+
+	$jotform->get_folder($id)
+
+	Get a list of forms in a folder, and other details about the form such as folder color.
+=cut
+
 
 sub get_folder {
 	my ($self, $fol_id) = @_;
@@ -259,12 +372,22 @@ sub get_folder {
 	return $self->_get("form/submission/$fol_id"); 
 }
 
+=item B<get_system_plan($plan_name)>
+
+	$jotform->get_system_plan($plan_name)
+
+	Get limit and prices of a plan.
+
+=cut
+
+
 sub get_system_plan {
 	my ($self, $plan_name) = @_;
 	croak "No plan name provided to get_system_plan" if !$plan_name;
 	return $self->_get("system/plan/$plan_name"); 
 
 }
+
 
 sub _get {
 	my ($self, $path, $params) = @_;
