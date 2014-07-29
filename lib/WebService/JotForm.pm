@@ -10,7 +10,7 @@ use Carp qw(croak);
 
 =head1 NAME
 
-WebService::JotForm - The great new WebService::JotForm!
+WebService::JotForm - Perl interface to JotForm's API -- currently only the read operations, not creating or deleting data 
 
 =head1 VERSION
 
@@ -76,7 +76,39 @@ sub BUILD {
 
 =head1 METHODS
 
-=item B<get_user()>
+=head2 new(%params)
+
+Create a new WebService::JotForm object with hash parameter
+
+	my $jotform = WebService::JotForm->new(
+		apiKey => '1234567890abcdef'
+	);
+
+Accepts the follwing parameters:
+
+=over 4
+
+=item * apiKey
+
+Required parameter.  JotForm apiKey
+
+= item * apiBase
+
+Optional parameter - defaults to: 'https://api.jotform.com'
+
+= item * apiVersion
+
+Optional parameter - defaults to 'v1'
+
+= item * agent
+
+Agent that acts like LWP::UserAgent used for making requests -- module defaults to creating its own if none is provide
+
+=back
+
+=cut
+
+=head2 get_user()
 
 	$jotform->get_user();
 
@@ -92,7 +124,7 @@ sub get_user {
 	return $self->_get("user");
 }
 
-=item B<get_user_usage()>
+=head2 get_user_usage()
 
 	$jotform->get_user_usage();
 
@@ -105,7 +137,8 @@ sub get_user_usage {
 	return $self->_get("user/usage");
 }
 
-=item B<get_user_submissions($params)>
+
+=head2 get_user_submissions($params)
 
 	$jotform->get_user_submissions($params);
 
@@ -119,6 +152,9 @@ sub get_user_submissions {
 	my $self = shift;
 	return $self->_get("user/submissions");
 }
+
+=over 2
+
 =item B<get_user_subusers()>
 
 	$jotform->get_user_subusers();
@@ -155,6 +191,7 @@ sub get_user_reports {
 	my $self = shift;
 	return $self->_get("user/reports");
 }
+
 =item B<get_user_logout()>
 
 	$jotform->get_user_logout();
@@ -299,6 +336,7 @@ sub get_form_files {
 	croak "No form id provided to get_form_files" if !$form_id;
 	return $self->_get("form/$form_id/files"); 
 }
+
 =item B<get_form_webhooks($id)>
 
 	$jotform->get_form_webhooks($id)
@@ -355,10 +393,10 @@ sub get_submission {
 sub get_report {
 	my ($self, $rep_id) = @_;
 	croak "No report id provided to get_report" if !$rep_id;
-	return $self->_get("form/submission/$rep_id"); 
+	return $self->_get("report/$rep_id"); 
 }
 
-=item B<get_folder_id($id)>
+=item B<get_folder($id)>
 
 	$jotform->get_folder($id)
 
@@ -369,7 +407,7 @@ sub get_report {
 sub get_folder {
 	my ($self, $fol_id) = @_;
 	croak "No folder id provided to get_folder" if !$fol_id;
-	return $self->_get("form/submission/$fol_id"); 
+	return $self->_get("folder/$fol_id"); 
 }
 
 =item B<get_system_plan($plan_name)>
@@ -377,7 +415,7 @@ sub get_folder {
 	$jotform->get_system_plan($plan_name)
 
 	Get limit and prices of a plan.
-
+=back
 =cut
 
 
@@ -411,6 +449,7 @@ sub _gen_request_url {
 	return $url;
 } 
 
+=back
 
 =head1 AUTHOR
 
