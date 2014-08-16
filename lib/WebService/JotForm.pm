@@ -1,6 +1,5 @@
 package WebService::JotForm;
 
-use 5.006;
 use strict;
 use warnings FATAL => 'all';
 use Moo;
@@ -144,7 +143,7 @@ sub get_user_usage {
 
 Get a list of all submissions for all forms on this account. The answers array has the submission data. Created_at is the date of the submission.
 
-XXXPARAMS
+TODO -- document additional optional params
 
 =cut
 
@@ -236,7 +235,7 @@ sub get_user_history {
 
 Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.
 
-XXXParams
+TODO -- document additionsal optional params
 
 =cut
 
@@ -432,8 +431,6 @@ sub _get {
 	my $url = $self->_gen_request_url($path, $params);
 	my $resp = $self->agent->get($url);
 
-	print "Fetching url: $url\n";
-	
 	unless ($resp->is_success) {
 		croak "Failed to fetch $url - ".$resp->status_line;
 	}
