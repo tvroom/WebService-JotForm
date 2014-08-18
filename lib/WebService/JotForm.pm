@@ -13,7 +13,7 @@ WebService::JotForm - Perl interface to JotForm's API -- currently only the read
 
 =head1 VERSION
 
-Version 0.001
+Version 0.002
 
 =head1 SYNOPSIS
 	
@@ -50,7 +50,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
@@ -68,8 +68,6 @@ sub BUILD {
 
 	my $resp = $self->agent->get($self->apiBase . "/" . $self->apiVersion . "/user?apiKey=" . $self->apiKey);
 
-	print $resp->decoded_content;
-	
 	return;
 }
 

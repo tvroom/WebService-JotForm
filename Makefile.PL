@@ -15,11 +15,15 @@ WriteMakefile(
         'ExtUtils::MakeMaker' => 0,
     },
     BUILD_REQUIRES => {
+    },
+    TEST_REQUIRES => {
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        #'ABC'              => 1.6,
-        #'Foo::Bar::Module' => 5.0401,
+	'Carp' 			=> 0,
+	'Moo'  			=> 0,
+	'JSON::Any' 		=> 0,
+	'LWP::UserAgent' 	=> 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WebService-JotForm-*' },
