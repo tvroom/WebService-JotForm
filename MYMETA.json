@@ -21,9 +21,7 @@
    },
    "prereqs" : {
       "build" : {
-         "requires" : {
-            "Test::More" : "0"
-         }
+         "requires" : {}
       },
       "configure" : {
          "requires" : {
@@ -32,10 +30,19 @@
       },
       "runtime" : {
          "requires" : {
+            "Carp" : "0",
+            "JSON::Any" : "0",
+            "LWP::UserAgent" : "0",
+            "Moo" : "0",
             "perl" : "5.006"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.001"
+   "version" : "0.002"
 }

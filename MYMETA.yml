@@ -18,5 +18,9 @@ no_index:
     - t
     - inc
 requires:
+  Carp: '0'
+  JSON::Any: '0'
+  LWP::UserAgent: '0'
+  Moo: '0'
   perl: '5.006'
-version: '0.001'
+version: '0.002'
