@@ -1,7 +1,15 @@
 Revision history for WebService-JotForm
 
-Version	Date/time
+0.003   2014-08-18     
 
-0.002   2014-08-18     Added some module prerequisites, based on testing reports 
-0.001   2014-08-16     First version, released on an unsuspecting world.
+[Docs]
+POD formatting Improvements
+
+0.002   2014-08-18     
+
+Added some module prerequisites, based on testing reports 
+
+0.001   2014-08-16     
+
+First version, released on an unsuspecting world.
 
