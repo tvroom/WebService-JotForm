@@ -13,7 +13,7 @@ WebService::JotForm - Perl interface to JotForm's API -- currently only the read
 
 =head1 VERSION
 
-Version 0.002
+Version 0.003
 
 =head1 SYNOPSIS
 	
@@ -50,7 +50,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
@@ -81,7 +81,7 @@ Create a new WebService::JotForm object with hash parameter
 		apiKey => '1234567890abcdef'
 	);
 
-Accepts the follwing parameters:
+Accepts the following parameters:
 
 =over 4
 
@@ -150,9 +150,7 @@ sub get_user_submissions {
 	return $self->_get("user/submissions");
 }
 
-=over 2
-
-=item B<get_user_subusers()>
+=head2 get_user_subusers()
 
 	$jotform->get_user_subusers();
 
@@ -164,7 +162,7 @@ sub get_user_subusers {
 	return $self->_get("user/subusers");
 }
 
-=item B<get_user_folders()>
+=head2 get_user_folders()
 
 	$jotform->get_user_folders();
 
@@ -177,7 +175,7 @@ sub get_user_folders {
 	return $self->_get("user/folders");
 }
 
-=item B<get_user_reports()>
+=head2 get_user_reports()
 	
 	$jotform->get_user_reports();
 
@@ -189,7 +187,7 @@ sub get_user_reports {
 	return $self->_get("user/reports");
 }
 
-=item B<get_user_logout()>
+=head2 get_user_logout()
 
 	$jotform->get_user_logout();
 
@@ -201,7 +199,7 @@ sub get_user_logout {
 	return $self->_get("user/logout");
 }
 
-=item B<get_user_settings()>
+=head2 <get_user_settings()
 
 	$jotform->get_user_settings();
 
@@ -213,7 +211,7 @@ sub get_user_settings {
 	return $self->_get("user/settings");
 }
 
-=item B<get_user_history()>
+=head2 get_user_history()
 
 	$jotform->get_user_history();
 
@@ -226,7 +224,7 @@ sub get_user_history {
 	return $self->_get("user/history", $params);
 }
 
-=item B<get_user_forms($params)>
+=head2 get_user_forms($params)
 
 	$jotform->get_user_forms($params);
 
@@ -242,7 +240,7 @@ sub get_user_forms {
 	return $self->_get("user/forms", $params);
 }
 
-=item B<get_form($id)>
+=head2 get_form($id)
 
 	$jotform->get_form($id);
 
@@ -256,7 +254,7 @@ sub get_form {
 	return $self->_get("form/$form_id");
 }
 
-=item B<get_form_questions($id)>
+=head2 get_form_questions($id)
 	
 	$jotform->get_form_questions($id);
 
@@ -270,7 +268,7 @@ sub get_form_questions {
 	return $self->_get("form/$form_id/questions");
 }
 
-=item B<get_form_question($form_id, $qid)>
+=head2 get_form_question($form_id, $qid)
 	
 	$jotform->get_form_question($form_id, $qid);
 
@@ -284,7 +282,7 @@ sub get_form_question {
 	return $self->_get("form/$form_id/question/$qid");
 }
 
-=item B<get_form_properties($id,$key)>
+=head2 get_form_properties($id,$key)
 
 	$jotform->get_form_properties($id);
 	
@@ -305,7 +303,7 @@ sub get_form_properties {
 	}
 }
 
-=item B<get_form_reports($id)>
+=head2 get_form_reports($id)
 
 	$jotform->getFormReports($id);
 
@@ -319,7 +317,7 @@ sub get_form_reports {
 	return $self->_get("form/$form_id/reports"); 
 }
 
-=item B<(get_form_files($id)>
+=head2 (get_form_files($id)
 
 	$jotform->get_form_files($id);
 
@@ -334,7 +332,7 @@ sub get_form_files {
 	return $self->_get("form/$form_id/files"); 
 }
 
-=item B<get_form_webhooks($id)>
+=head2 get_form_webhooks($id)
 
 	$jotform->get_form_webhooks($id)
 
@@ -349,7 +347,7 @@ sub get_form_webhooks {
 	return $self->_get("form/$form_id/webhooks"); 
 }
 
-=item B<get_form_submissions($id)>
+=head2 get_form_submissions($id)
 
 	$jotform->get_form_submissions($id, $params);
 
@@ -364,7 +362,7 @@ sub get_form_submissions {
 	return $self->_get("form/$form_id/submissions"); 
 }
 
-=item B<get_submission($id)>
+=head2 get_submission($id)
 
 	$jotform->get_submission($id);
 
@@ -379,7 +377,7 @@ sub get_submission {
 	return $self->_get("form/submission/$sub_id"); 
 }
 
-=item B<get_report($id)>
+=head2 get_report($id)
 
 	$jotform->get_report($id);
 
@@ -393,7 +391,7 @@ sub get_report {
 	return $self->_get("report/$rep_id"); 
 }
 
-=item B<get_folder($id)>
+=head2 get_folder($id)
 
 	$jotform->get_folder($id)
 
@@ -407,12 +405,11 @@ sub get_folder {
 	return $self->_get("folder/$fol_id"); 
 }
 
-=item B<get_system_plan($plan_name)>
+=head2 get_system_plan($plan_name)
 
 	$jotform->get_system_plan($plan_name)
 
 	Get limit and prices of a plan.
-=back
 =cut
 
 
@@ -444,7 +441,6 @@ sub _gen_request_url {
 	return $url;
 } 
 
-=back
 
 =head1 AUTHOR
 
