@@ -29,8 +29,14 @@ my $jotform = WebService::JotForm->new(apiKey => $token);
 
 my $user_info = $jotform->get_user();
 
-ok(exists $user_info->{'limit-left'}, "Got a limit-left key in return");
+ok(exists $user_info->{'limit-left'}, "Got a limit-left key in return for get_user");
 
+my $user_usage = $jotform->get_user_usage();
+
+ok(exists $user_usage->{content}{submissions}, "Got a submissions key in return for get_user_usage");
+
+my $user_submissions = $jotform->get_user_submissions();
+ok(exists $user_submissions->{content}[0]{form_id}, "Got a form_id key in return for get_user_submissions");
 
 my $forms = $jotform->get_user_forms();
 
