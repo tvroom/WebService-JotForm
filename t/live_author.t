@@ -5,6 +5,7 @@ use Test::More;
 use WebService::JotForm;
 use JSON::Any;
 use Data::Dumper;
+use Test::Deep;
 
 #Test some of the api methods, before allowing a release to happen
 
@@ -24,12 +25,25 @@ if (not $token) {
     plan skip_all => "Cannot read $token_file";
 }
 
+my $cases = {
+	'get_user_outer' => {
+          'responseCode' => 200,
+          'limit-left' => re('^\d+$'), 
+          'message' => 'success'
+        },
+	get_user_content => {
+		username => re('^\w+$')
+	}
+
+};
+
 my $jotform = WebService::JotForm->new(apiKey => $token);
 
 
 my $user_info = $jotform->get_user();
 
-ok(exists $user_info->{'limit-left'}, "Got a limit-left key in return for get_user");
+cmp_deeply($user_info, superhashof($cases->{get_user_outer}), "Got expected result from get_user() call for outer content");
+cmp_deeply($user_info->{content}, superhashof($cases->{get_user_content}), "Got expected result from get_user() call for content returned");
 
 my $user_usage = $jotform->get_user_usage();
 
