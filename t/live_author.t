@@ -81,8 +81,9 @@ my $formid = $forms->{content}[0]{id};
 ok($formid, "Got at least one form as well as an id for it");
 
 my $form_submissions_info = $jotform->get_form_submissions($formid);
+cmp_deeply($form_submissions_info, superhashof($cases->{response_wrap}), "Got expected result from get_form_submissions() response_wrap");
+cmp_deeply($form_submissions_info->{resultSet}, superhashof($cases->{resultSet}), "Got expected result from get_form_submissions() resultSet");
 
-ok(exists $form_submissions_info->{resultSet}, "Got a resultSet back");
 ok($form_submissions_info->{resultSet}{count} >0, "Got a resultSet back with at least one form submission");
 
 
