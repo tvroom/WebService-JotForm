@@ -31,9 +31,17 @@ my $cases = {
           'limit-left' => re('^\d+$'), 
           'message' => 'success'
         },
+	
+	resultSet => {
+		'count'  => re('^\d+$'), 
+		'limit'  => re('^\d+$'),
+		'offset' => re('^\d+$'),
+	},
+
 	get_user_content => {
 		username => re('^\w+$')
 	},
+
 	get_user_usage_content => {
 		submissions => re('^\d+$'),
 		payments => re('^\d+$'),
@@ -61,11 +69,12 @@ ok(exists $user_usage->{content}{submissions}, "Got a submissions key in return 
 
 my $user_submissions = $jotform->get_user_submissions();
 cmp_deeply($user_submissions, superhashof($cases->{response_wrap}), "Got expected result from get_user_submissions() response_wrap");
+cmp_deeply($user_submissions->{resultSet}, superhashof($cases->{resultSet}), "Got expected result from get_user_submissions() resultSet block");
 
-print Dumper($user_submissions);
 ok(exists $user_submissions->{content}[0]{form_id}, "Got a form_id key in return for get_user_submissions");
 
 my $forms = $jotform->get_user_forms();
+cmp_deeply($forms, superhashof($cases->{response_wrap}), "Got expected result from get_user_form() response_wrap");
 
 my $formid = $forms->{content}[0]{id};
 
