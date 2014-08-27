@@ -377,7 +377,7 @@ sub get_form_submissions {
 sub get_submission {
 	my ($self, $sub_id) = @_;
 	croak "No submission id provided to get_submission" if !$sub_id;
-	return $self->_get("form/submission/$sub_id"); 
+	return $self->_get("submission/$sub_id");
 }
 
 =head2 get_report($id)
