@@ -6,7 +6,7 @@
    "dynamic_config" : 0,
    "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141520",
    "license" : [
-      "unknown"
+      "artistic2"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -32,7 +32,12 @@
       },
       "runtime" : {
          "requires" : {
+            "Carp" : "0",
+            "JSON::Any" : "0",
+            "LWP::UserAgent" : "0",
+            "Moo" : "0",
             "perl" : "5.006"
+            "URI::Escape" : "0"
          }
       }
    },
