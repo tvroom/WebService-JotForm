@@ -5,6 +5,7 @@ use warnings FATAL => 'all';
 use Moo;
 use JSON::Any;
 use LWP::UserAgent;
+use URI::Escape qw(uri_escape);
 use Carp qw(croak);
 
 =head1 NAME
@@ -146,8 +147,9 @@ TODO -- document additional optional params
 =cut
 
 sub get_user_submissions {
-	my $self = shift;
-	return $self->_get("user/submissions");
+	my ($self, $params) = @_;
+	$params ||= {};
+	return $self->_get("user/submissions", $params);
 }
 
 =head2 get_user_subusers()
@@ -436,7 +438,7 @@ sub _gen_request_url {
 	my ($self, $path, $params) = @_;
 	my $url = join("/", $self->apiBase, $self->apiVersion, $path) . "?apiKey=" .$self->apiKey;
 	foreach my $param (keys %$params) {
-		$url .= "&$param=$params->{$param}";
+		$url .= "&".uri_escape($param) ."=". uri_escape($params->{$param});
 	}
 	return $url;
 } 
