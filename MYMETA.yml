@@ -23,4 +23,5 @@ requires:
   LWP::UserAgent: '0'
   Moo: '0'
   perl: '5.006'
-version: '0.003'
+  URI::Escape: '0'
+version: '0.004'

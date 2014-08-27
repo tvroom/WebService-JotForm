@@ -35,6 +35,7 @@
             "LWP::UserAgent" : "0",
             "Moo" : "0",
             "perl" : "5.006"
+            "URI::Escape" : "0"
          }
       },
       "test" : {
