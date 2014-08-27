@@ -75,6 +75,20 @@ my $cases = {
                            'list_type' =>  re('^[a-zA-Z0-9]+$'),
                            'url' => re('^http:'),
                        },
+	get_submission_content => {
+                         'form_id' => re('^[0-9]+$'), 
+                         'id' => re('^[0-9]+$'),
+                         'new' => re('^[0-9]+$'),
+	},
+	get_report_content =>  {
+                         'form_id' => re('^[0-9]+$'), 
+                         'list_type' => re('^[a-zA-Z0-9]+$'),
+                         'url' => re('^http:'), 
+                         'id' => re('^[0-9]+$'),
+	},
+	get_system_plan_content => {
+		name => re('^[A-Za-z0-9]+$'),
+	}
 };
 
 my $jotform = WebService::JotForm->new(apiKey => $token);
@@ -96,6 +110,8 @@ cmp_deeply($user_submissions, superhashof($cases->{response_wrap}), "Got expecte
 cmp_deeply($user_submissions->{resultSet}, superhashof($cases->{resultSet}), "Got expected result from get_user_submissions() resultSet block");
 
 ok(exists $user_submissions->{content}[0]{form_id}, "Got a form_id key in return for get_user_submissions");
+
+my $submission_id = $user_submissions->{content}[0]{id};
 
 my $forms = $jotform->get_user_forms();
 cmp_deeply($forms, superhashof($cases->{response_wrap}), "Got expected result from get_user_form() response_wrap");
@@ -120,6 +136,7 @@ cmp_deeply($folders->{content}, superhashof($cases->{get_user_folders_content}),
 my $reports = $jotform->get_user_reports();
 cmp_deeply($reports, superhashof($cases->{response_wrap}), "Got expected results from get_user_reports() response_wrap");
 cmp_deeply($reports->{content}[0], superhashof($cases->{get_user_reports_content_first}), "Got expected results from get_user_reports() content first");
+my $report_id = $reports->{content}[0]{id};
 
 my $settings = $jotform->get_user_settings();
 cmp_deeply($settings, superhashof($cases->{response_wrap}), "Got expected results from get_user_settings() response_wrap");
@@ -152,4 +169,16 @@ cmp_deeply($form_files, superhashof($cases->{response_wrap}), "Got expected resu
 
 my $form_webhooks = $jotform->get_form_webhooks($formid);
 cmp_deeply($form_webhooks, superhashof($cases->{response_wrap}), "Got expected results from get_form_webhooks() response_wrap");
+
+my $submission = $jotform->get_submission($submission_id);
+cmp_deeply($submission, superhashof($cases->{response_wrap}), "Got expected results from get_submission() response_wrap");
+cmp_deeply($submission->{content}, superhashof($cases->{get_submission_content}), "Got expected results from get_submission() content");
+
+my $report = $jotform->get_report($report_id);
+cmp_deeply($report, superhashof($cases->{response_wrap}), "Got expected results from get_report() response_wrap");
+cmp_deeply($report->{content}, superhashof($cases->{get_report_content}), "Got expected results from get_report() content");
+
+my $system_plan = $jotform->get_system_plan('FREE');
+cmp_deeply($system_plan, superhashof($cases->{response_wrap}), "Got expected results from get_system_plan() response_wrap");
+cmp_deeply($system_plan->{content}, superhashof($cases->{get_system_plan_content}), "Got expected results from get_system_plan() response_content");
 done_testing;
