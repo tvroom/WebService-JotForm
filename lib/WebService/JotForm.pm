@@ -90,15 +90,15 @@ Accepts the following parameters:
 
 Required parameter.  JotForm apiKey
 
-= item * apiBase
+=item * apiBase
 
 Optional parameter - defaults to: 'https://api.jotform.com'
 
-= item * apiVersion
+=item * apiVersion
 
 Optional parameter - defaults to 'v1'
 
-= item * agent
+=item * agent
 
 Agent that acts like LWP::UserAgent used for making requests -- module defaults to creating its own if none is provide
 
