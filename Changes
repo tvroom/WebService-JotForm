@@ -1,5 +1,14 @@
 Revision history for WebService-JotForm
 
+0.004   2014-08-26
+[Tests]
+	Added more release tests
+
+[Bugs Fixed]
+	Fixed get_user_submissions end point
+	Corrected url encoding of parameters
+
+     
 0.003   2014-08-18     
 
 [Docs]
