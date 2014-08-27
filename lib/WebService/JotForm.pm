@@ -14,7 +14,7 @@ WebService::JotForm - Perl interface to JotForm's API -- currently only the read
 
 =head1 VERSION
 
-Version 0.004
+Version 0.005
 
 =head1 SYNOPSIS
 	
@@ -51,7 +51,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
@@ -217,7 +217,8 @@ sub get_user_settings {
 
 	$jotform->get_user_history();
 
-Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.
+User activity log about things like forms created/modified/deleted, account logins and other operations.
+
 
 =cut
 

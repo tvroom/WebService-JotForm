@@ -1,5 +1,14 @@
 Revision history for WebService-JotForm
 
+0.005   2014-08-27
+[Tests]
+	Added more author release tests / increased coverage based on Devel::Cover results
+[Docs]
+	Documentation Fixes
+[Meta]
+	Improvements to license meta data for showing on CPAN
+
+
 0.004   2014-08-26
 [Tests]
 	Added more release tests

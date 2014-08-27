@@ -8,7 +8,7 @@ configure_requires:
   ExtUtils::MakeMaker: '0'
 dynamic_config: 0
 generated_by: 'ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141520'
-license: unknown
+license: artistic_2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
@@ -23,5 +23,4 @@ requires:
   LWP::UserAgent: '0'
   Moo: '0'
   perl: '5.006'
-  URI::Escape: '0'
-version: '0.004'
+version: '0.005'
