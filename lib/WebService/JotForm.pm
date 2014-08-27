@@ -201,7 +201,7 @@ sub get_user_logout {
 	return $self->_get("user/logout");
 }
 
-=head2 <get_user_settings()
+=head2 get_user_settings()
 
 	$jotform->get_user_settings();
 
