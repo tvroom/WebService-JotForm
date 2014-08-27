@@ -319,7 +319,7 @@ sub get_form_reports {
 	return $self->_get("form/$form_id/reports"); 
 }
 
-=head2 (get_form_files($id)
+=head2 get_form_files($id)
 
 	$jotform->get_form_files($id);
 
