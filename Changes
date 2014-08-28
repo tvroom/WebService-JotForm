@@ -1,5 +1,13 @@
 Revision history for WebService-JotForm
 
+0.006   2014-08-27
+[Tests]
+	Improved subroutine test coverage
+
+[Bugs Fixed]
+	Fixed bug with get_submission method pointing to incorrect API endpoint
+
+
 0.005   2014-08-27
 [Tests]
 	Added more author release tests / increased coverage based on Devel::Cover results
