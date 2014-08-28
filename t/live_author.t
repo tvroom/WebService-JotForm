@@ -88,6 +88,10 @@ my $cases = {
 	},
 	get_system_plan_content => {
 		name => re('^[A-Za-z0-9]+$'),
+	},
+	get_folder_content => {
+                         'parent' => re('^[A-Za-z0-9]+$'),
+                         'id' => re('^[A-Za-z0-9]+$'),
 	}
 };
 
@@ -132,6 +136,8 @@ cmp_deeply($sub_users, superhashof($cases->{response_wrap}), "Got expected resul
 my $folders = $jotform->get_user_folders();
 cmp_deeply($folders, superhashof($cases->{response_wrap}), "Got expected results from get_user_folders() response_wrap");
 cmp_deeply($folders->{content}, superhashof($cases->{get_user_folders_content}), "Got expected results from get_user_folders() content");
+
+my $folder_id = $folders->{content}{subfolders}[0]{id};
 
 my $reports = $jotform->get_user_reports();
 cmp_deeply($reports, superhashof($cases->{response_wrap}), "Got expected results from get_user_reports() response_wrap");
@@ -181,4 +187,11 @@ cmp_deeply($report->{content}, superhashof($cases->{get_report_content}), "Got e
 my $system_plan = $jotform->get_system_plan('FREE');
 cmp_deeply($system_plan, superhashof($cases->{response_wrap}), "Got expected results from get_system_plan() response_wrap");
 cmp_deeply($system_plan->{content}, superhashof($cases->{get_system_plan_content}), "Got expected results from get_system_plan() response_content");
+
+
+my $folder = $jotform->get_folder($folder_id);
+cmp_deeply($folder, superhashof($cases->{response_wrap}), "Got expected results from get_folder() response_wrap");
+cmp_deeply($folder->{content}, superhashof($cases->{get_folder_content}), "Got expected results from get_folder() content");
+
+
 done_testing;
