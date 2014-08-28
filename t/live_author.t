@@ -175,6 +175,7 @@ cmp_deeply($form_files, superhashof($cases->{response_wrap}), "Got expected resu
 
 my $form_webhooks = $jotform->get_form_webhooks($formid);
 cmp_deeply($form_webhooks, superhashof($cases->{response_wrap}), "Got expected results from get_form_webhooks() response_wrap");
+like($form_webhooks->{content}{0}, qr/http:/, "Got an initial webhook that starts with http:");
 
 my $submission = $jotform->get_submission($submission_id);
 cmp_deeply($submission, superhashof($cases->{response_wrap}), "Got expected results from get_submission() response_wrap");
