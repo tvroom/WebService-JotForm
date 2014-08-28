@@ -8,7 +8,7 @@ WriteMakefile(
     AUTHOR           => q{Tim Vroom <vroom@blockstackers.com>},
     VERSION_FROM     => 'lib/WebService/JotForm.pm',
     ABSTRACT_FROM    => 'lib/WebService/JotForm.pm',
-    LICENSE          => 'Artistic_2_0',
+    LICENSE          => 'artistic_2',
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
     CONFIGURE_REQUIRES => {
