@@ -22,7 +22,8 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : "0"
+            "Test::More" : "0",
+	    "Test::Deep" : "0",
          }
       },
       "configure" : {
@@ -42,5 +43,5 @@
       }
    },
    "release_status" : "alpha",
-   "version" : "0.008"
+   "version" : "0.009"
 }

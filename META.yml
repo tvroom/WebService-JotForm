@@ -4,6 +4,7 @@ author:
   - 'Tim Vroom <vroom@blockstackers.com>'
 build_requires:
   Test::More: '0'
+  Test::Deep: '0'
 configure_requires:
   ExtUtils::MakeMaker: '0'
 dynamic_config: 0
@@ -19,4 +20,4 @@ no_index:
     - inc
 requires:
   perl: '5.006'
-version: '0.008'
+version: '0.009'
