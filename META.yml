@@ -20,4 +20,7 @@ no_index:
     - inc
 requires:
   perl: '5.006'
-version: '0.009'
+resources:
+  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=WebService-Jotform
+  repository: https://github.com/tvroom/WebService-JotForm.git
+version: '0.011'

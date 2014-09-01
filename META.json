@@ -42,6 +42,19 @@
          }
       }
    },
+   resources => {
+      homepage    => 'http://github.com/tvroom/WebService-JotForm',
+      bugtracker  => {
+      web         => 'http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-Meta',
+      mailto      => 'bug-WebService-JotForm@rt.cpan.org',
+    },
+    repository  => {
+       url  => 'https://github.com/tvroom/WebService-JotForm.git',
+       web  => 'http://github.com/tvroom/WebService-JotForm',
+       type => 'git',
+    },
+  },
+
    "release_status" : "alpha",
-   "version" : "0.009"
+   "version" : "0.011"
 }
