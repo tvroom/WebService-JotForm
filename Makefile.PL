@@ -25,6 +25,17 @@ WriteMakefile(
 	'Moo'  			=> 0,
 	'JSON::Any' 		=> 0,
 	'LWP::UserAgent' 	=> 0,
+	'URI::Escape'		=> 0,
+    },
+    META_MERGE => {
+    'meta-spec' => { version => 2 },
+         resources => {
+             repository => {
+                type => 'git',
+                url  => 'https://github.com/tvroom/WebService-JotForm',
+                web  => 'https://github.com/tvroom/WebService-JotForm.git',
+             },
+         },
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WebService-JotForm-*' },

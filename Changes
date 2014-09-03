@@ -1,5 +1,9 @@
 Revision history for WebService-JotForm
 
+0.013   2014-09-02
+	- README updates
+        - another attempt at getting repository info to show on MetaCPAN
+ 
 0.012   2014-09-01
 	- Fix META.json file so it parses correctly 
 

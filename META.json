@@ -21,10 +21,7 @@
    },
    "prereqs" : {
       "build" : {
-         "requires" : {
-            "Test::More" : "0",
-	    "Test::Deep" : "0"
-         }
+         "requires" : {}
       },
       "configure" : {
          "requires" : {
@@ -37,23 +34,29 @@
             "JSON::Any" : "0",
             "LWP::UserAgent" : "0",
             "Moo" : "0",
-            "perl" : "5.006",
-            "URI::Escape" : "0"
+            "URI::Escape" : "0",
+            "perl" : "5.006"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::Deep" : "0",
+            "Test::More" : "0"
          }
       }
    },
+   "release_status" : "stable",
    "resources" : {
-      "homepage" : "http://github.com/tvroom/WebService-JotForm",
       "bugtracker" : {
-         "web"       : "http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-Meta",
-         "mailto"     : "bug-WebService-JotForm@rt.cpan.org"
-       },
-       "repository" : {
-          "url" : "https://github.com/tvroom/WebService-JotForm.git",
-          "web" : "http://github.com/tvroom/WebService-JotForm",
-          "type" : "git"
-        }
-  },
-   "release_status" : "alpha",
-   "version" : "0.012"
+         "mailto" : "bug-WebService-JotForm@rt.cpan.org",
+         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-Meta"
+      },
+      "homepage" : "http://github.com/tvroom/WebService-JotForm",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/tvroom/WebService-JotForm.git",
+         "web" : "http://github.com/tvroom/WebService-JotForm"
+      }
+   },
+   "version" : "0.013"
 }
