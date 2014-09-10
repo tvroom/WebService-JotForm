@@ -92,7 +92,19 @@ my $cases = {
 	get_folder_content => {
                          'parent' => re('^[A-Za-z0-9]+$'),
                          'id' => re('^[A-Za-z0-9]+$'),
+	},
+	register_user_content => {
+		      'avatarUrl' => re('^http:'),
+                      'username' => re('webserv-jot-test'),
+	},
+	login_user_content => {
+		      'avatarUrl' => re('^http:'),
+                      'username' => re('webserv-jot-test'),
+	},
+	update_user_settings_content => {
+        	'email' => re('webserv-jot-test.*-2'),
 	}
+
 };
 
 my $jotform = WebService::JotForm->new(apiKey => $token);
@@ -194,5 +206,25 @@ my $folder = $jotform->get_folder($folder_id);
 cmp_deeply($folder, superhashof($cases->{response_wrap}), "Got expected results from get_folder() response_wrap");
 cmp_deeply($folder->{content}, superhashof($cases->{get_folder_content}), "Got expected results from get_folder() content");
 
+
+my $reg_user_random = "webserv-jot-test-";
+my @chars = (0..9,'a'..'z');
+for(1..5) {
+	$reg_user_random .= $chars[rand @chars];
+}
+
+
+my $registered_user = $jotform->register_user({ username => $reg_user_random, password => $reg_user_random, email => "$reg_user_random\@timvroom.com"});
+
+cmp_deeply($registered_user, superhashof($cases->{response_wrap}), "Got expected results from register_user() response_wrap");
+cmp_deeply($registered_user->{content}, superhashof($cases->{register_user_content}), "Got expected results from register_user() content");
+
+my $login_user = $jotform->login_user({ username => $reg_user_random, password => $reg_user_random });
+cmp_deeply($login_user, superhashof($cases->{response_wrap}), "Got expected results from login_user() response_wrap");
+cmp_deeply($login_user->{content}, superhashof($cases->{login_user_content}), "Got expected results from login_user() content");
+
+my $update_user_settings = $jotform->update_user_settings({ email => "$reg_user_random-2\@timvroom.com"});
+cmp_deeply($update_user_settings, superhashof($cases->{response_wrap}), "Got expected results from update_user_settings() response_wrap");
+cmp_deeply($update_user_settings->{content}, superhashof($cases->{update_user_settings_content}), "Got expected results from update_user_settings() content");
 
 done_testing;

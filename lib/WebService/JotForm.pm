@@ -10,11 +10,13 @@ use Carp qw(croak);
 
 =head1 NAME
 
-WebService::JotForm - Perl interface to JotForm's API -- currently only the read operations, not creating or deleting data 
+WebService::JotForm - Perl interface to JotForm's API -- currently only the read operations are fully supported.
+
+Support for create, update, and delete operations are beginning to be added in this and future releases.
 
 =head1 VERSION
 
-Version 0.013
+Version 0.014
 
 =head1 SYNOPSIS
 	
@@ -51,7 +53,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.013';
+our $VERSION = '0.014';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
@@ -189,6 +191,42 @@ sub get_user_reports {
 	return $self->_get("user/reports");
 }
 
+=head2 register_user()
+
+	$jotform->register_user($params);
+
+	$jotform->register_user({ username => $username, password => $pw, email => $email });
+
+Register a new JotForm account with username, password and email
+
+=cut
+
+sub register_user {
+	my $self = shift;
+	my $params = shift;
+	$params ||= {};
+	return $self->_post("user/register", $params);
+}
+
+=head2 login_user()
+
+	$jotform->register_user($params);
+
+	$jotform->register_user({ username => $username, password => $pw });
+
+Login user with given credentials - accepts username, password, and optionally appName, and access
+
+=cut
+
+
+
+sub login_user {
+	my $self = shift;
+	my $params = shift;
+	$params ||= {};
+	return $self->_post("user/login", $params);
+}
+
 =head2 get_user_logout()
 
 	$jotform->get_user_logout();
@@ -212,6 +250,30 @@ sub get_user_settings {
 	my $self = shift;
 	return $self->_get("user/settings");
 }
+
+=head2 update_user_settings()
+
+	$jotform->update_user_settings($params);
+	
+	$jotform->update_user_settings({ email => $updated_email });
+
+Update user's settings like time zone and language.  Optional fields: name, email, website, time_zone, company, securityQuestion, securityAnswer, industry
+
+=cut
+sub update_user_settings {
+	my $self = shift;
+	my $params = shift;
+	$params ||= {};
+	
+	return $self->_post("user/settings", $params);
+}
+
+
+
+
+
+
+
 
 =head2 get_user_history()
 
@@ -429,6 +491,17 @@ sub _get {
 	my $url = $self->_gen_request_url($path, $params);
 	my $resp = $self->agent->get($url);
 
+	unless ($resp->is_success) {
+		croak "Failed to fetch $url - ".$resp->status_line;
+	}
+	return $json->decode($resp->content);
+}
+
+sub _post {
+	my ($self, $path, $params) = @_;
+	$params ||= {};
+	my $url = join("/", $self->apiBase, $self->apiVersion, $path) . "?apiKey=" .$self->apiKey;
+	my $resp = $self->agent->post($url, $params);
 	unless ($resp->is_success) {
 		croak "Failed to fetch $url - ".$resp->status_line;
 	}
