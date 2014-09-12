@@ -16,7 +16,7 @@ Support for create, update, and delete operations are beginning to be added in t
 
 =head1 VERSION
 
-Version 0.014
+Version 0.015
 
 =head1 SYNOPSIS
 	
@@ -53,7 +53,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.014';
+our $VERSION = '0.015';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');

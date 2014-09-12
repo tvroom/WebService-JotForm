@@ -1,5 +1,8 @@
 Revision history for WebService-JotForm
 
+0.015   2014-09-11
+	- added support for create_form and create_forms endpoints
+
 0.014   2014-09-09
 	- added register_user, login_user, and update_user_settings methods 
 
