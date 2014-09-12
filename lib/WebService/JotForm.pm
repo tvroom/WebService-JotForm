@@ -305,6 +305,45 @@ sub get_user_forms {
 	return $self->_get("user/forms", $params);
 }
 
+=head2 create_forms($params);
+
+	$jotform->create_forms($params);
+
+Add new forms with questions, properties and email settings.
+
+
+=cut
+
+sub create_forms {
+	my $self = shift;
+	my $params = shift;
+	$params ||= {};
+
+	return $self->_post("user/forms", $params);
+}
+
+=head2 create_form($params);
+
+	$jotform->create_form($params);
+
+Add new form with questions, properties and email settings.
+
+
+=cut
+
+sub create_form {
+	my $self = shift;
+	my $params = shift;
+	$params ||= {};
+
+	return $self->_post("/form", $params);
+}
+
+
+=head2 get_form($id)
+
+
+
 =head2 get_form($id)
 
 	$jotform->get_form($id);
