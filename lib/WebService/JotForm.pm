@@ -358,6 +358,42 @@ sub get_form {
 	return $self->_get("form/$form_id");
 }
 
+=head2 clone_form($id)
+	
+	$jotform->clone_form($id);
+
+Clone a given form
+=cut
+
+sub clone_form {
+	my ($self, $form_id) = @_;
+	croak "No form id provided to clone_form" if !$form_id;
+	return $self->_post("/form/$form_id/clone");
+}
+
+=head2 create_form_question($id, $question)
+
+	$jotform->create_form_question($id, $question)
+
+	Add a new question to a form, takes an id for the form as a parameter, and then a hasref of key/values for the question fields
+
+=cut
+
+sub create_form_question {
+	my ($self, $form_id, $question) = @_;
+	
+	croak "No form id provided to create_form_question" if !$form_id;
+	
+	$question ||= {};
+	my $params = {};
+
+	foreach (keys %$question) {
+		$params->{"question[$_]"} = $question->{$_};
+	}
+
+	return $self->_post("/form/$form_id/questions", $params);
+}
+
 =head2 get_form_questions($id)
 	
 	$jotform->get_form_questions($id);

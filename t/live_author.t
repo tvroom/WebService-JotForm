@@ -107,6 +107,17 @@ my $cases = {
 	create_form_content => {
                          'url' => re('^http:'),
                          'id' => re('^\d+$'),
+	},
+	clone_form_content =>  {
+                         'count' => re('^\d+$'),
+                         'url' => re('http:'),
+                         'id' => re('^\d+$'),
+                         'title' => re('Clone'),
+                         'new' => 0
+                       },
+	create_form_question_content => {
+	       'qid' => re('\d+$'),
+               'order' => re('\d+$'),
 	}
 
 };
@@ -130,6 +141,8 @@ cmp_deeply($user_submissions, superhashof($cases->{response_wrap}), "Got expecte
 cmp_deeply($user_submissions->{resultSet}, superhashof($cases->{resultSet}), "Got expected result from get_user_submissions() resultSet block");
 
 ok(exists $user_submissions->{content}[0]{form_id}, "Got a form_id key in return for get_user_submissions");
+
+my $form_id = $user_submissions->{content}[0]{form_id};
 
 my $submission_id = $user_submissions->{content}[0]{id};
 
@@ -264,11 +277,27 @@ my $created_form = $jotform->create_forms($create_form_data);
 #print Dumper($created_form);
 
 cmp_deeply($created_form, superhashof($cases->{response_wrap}), "Got expected results from create_forms() response_wrap");
-cmp_deeply($created_form, superhashof($cases->{create_forms_content}), "Got expected results from create_forms() content");
+cmp_deeply($created_form->{content}, superhashof($cases->{create_forms_content}), "Got expected results from create_forms() content");
 
 my $created_form2 = $jotform->create_form($create_form_data);
 cmp_deeply($created_form2, superhashof($cases->{response_wrap}), "Got expected results from create_form() response_wrap");
-cmp_deeply($created_form2, superhashof($cases->{create_forms_content}), "Got expected results from create_form() content");
+cmp_deeply($created_form2->{content}, superhashof($cases->{create_forms_content}), "Got expected results from create_form() content");
+
+my $clone_result = $jotform->clone_form($form_id);
+cmp_deeply($clone_result, superhashof($cases->{response_wrap}), "Got expected results from clone_form() response_wrap");
+cmp_deeply($clone_result->{content}, superhashof($cases->{clone_form_content}), "Got expected results from clone_form() content");
+#print Dumper($clone_result);
+
+my $create_form_question = $jotform->create_form_question($form_id, { 
+	"type" => "control_head", 
+	"text" => "Header", 
+	"order" => "1",
+	"name" => "clickTo" 
+});
+
+cmp_deeply($create_form_question, superhashof($cases->{response_wrap}), "Got expected results from create_form_question response_wrap");
+cmp_deeply($create_form_question->{content}, superhashof($cases->{create_form_question_content}), "Got expected results from create_form_question() content");
+
 
 
 
