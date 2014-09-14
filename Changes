@@ -1,5 +1,8 @@
 Revision history for WebService-JotForm
 
+0.016   2014-09-13
+	- added support for clone_form() and create_form_question() endpoints
+
 0.015   2014-09-11
 	- added support for create_form and create_forms endpoints
 
