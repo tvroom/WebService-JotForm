@@ -16,7 +16,7 @@ Support for create, update, and delete operations are beginning to be added in t
 
 =head1 VERSION
 
-Version 0.016
+Version 0.017
 
 =head1 SYNOPSIS
 	
@@ -53,7 +53,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.016';
+our $VERSION = '0.017';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
@@ -143,8 +143,27 @@ sub get_user_usage {
 	$jotform->get_user_submissions($params);
 
 Get a list of all submissions for all forms on this account. The answers array has the submission data. Created_at is the date of the submission.
+Optional paramaters
 
-TODO -- document additional optional params
+=over 4
+
+=item offset
+
+	Example: 20
+
+=item limit
+
+	Example: 20
+
+=item filter
+
+	Example: {"new":"1"} or {"created_at:gt":"2013-01-01 00:00:00"}
+
+=item orderby
+
+	Example: created_at
+
+=back
 
 =cut
 
@@ -392,6 +411,29 @@ sub create_form_question {
 	}
 
 	return $self->_post("/form/$form_id/questions", $params);
+}
+
+
+=head2 edit_form_question($form_id, $qid, $question);
+
+	$jotform->edit_form_question($form_id, $qid, $question);
+
+Edit a question property or add a new one. Form questions might have various properties. Examples: Is it required? Are there any validations such as 'numeric only'?
+
+=cut
+
+sub edit_form_question { 
+	my ($self, $form_id, $qid, $question) = @_;
+	croak "edit_form_question requires both a form_id and question id" if !$form_id && $qid;
+
+	$question ||= {};
+	my $params = {};
+	
+	foreach (keys %$question) {
+		$params->{"question[$_]"} = $question->{$_};
+	}
+	
+	return $self->_post("form/$form_id/question/$qid", $params);
 }
 
 =head2 get_form_questions($id)
