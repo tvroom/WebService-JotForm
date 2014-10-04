@@ -16,7 +16,7 @@ Support for create, update, and delete operations are beginning to be added in t
 
 =head1 VERSION
 
-Version 0.017
+Version 0.018
 
 =head1 SYNOPSIS
 	
@@ -53,7 +53,7 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.017';
+our $VERSION = '0.018';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
@@ -361,10 +361,6 @@ sub create_form {
 
 =head2 get_form($id)
 
-
-
-=head2 get_form($id)
-
 	$jotform->get_form($id);
 
 Get basic information about a form. Use get_form_questions($id) to get the list of questions.
@@ -434,6 +430,28 @@ sub edit_form_question {
 	}
 	
 	return $self->_post("form/$form_id/question/$qid", $params);
+}
+
+=head2 set_form_properties($form_id, $params)
+
+	$jotform->set_form_properties($form_id, $params);
+	
+	$jotform->set_form_properties($form_id, { formWidth => 555 });
+
+Add or edit properties of a specific form
+
+=cut 
+sub set_form_properties {
+	my($self, $form_id, $params) = @_;
+	croak "set_form_properties requires a form_id" if !$form_id;
+	$params ||= {};
+
+	my $props = {};
+
+	foreach(keys %$params) {
+		$props->{"properties[$_]"} = $params->{$_};
+	}
+	return $self->_post("/form/$form_id/properties", $props);
 }
 
 =head2 get_form_questions($id)

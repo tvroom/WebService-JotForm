@@ -1,5 +1,9 @@
 Revision history for WebService-JotForm
 
+0.018   2014-10-03
+	- added support for set_form_properties()
+	- minor documentation fixes	
+
 0.017   2014-09-27
 	- improved documentation of get_user_submissions optional parameters
 	- added edit_form_question support

@@ -118,6 +118,9 @@ my $cases = {
 	create_form_question_content => {
 	       'qid' => re('\d+$'),
                'order' => re('\d+$'),
+	},
+	set_form_properties_content => {
+	       'formWidth' => re('\d+$'),
 	}
 
 };
@@ -240,6 +243,7 @@ my $registered_user = $jotform->register_user({ username => $reg_user_random, pa
 cmp_deeply($registered_user, superhashof($cases->{response_wrap}), "Got expected results from register_user() response_wrap");
 cmp_deeply($registered_user->{content}, superhashof($cases->{register_user_content}), "Got expected results from register_user() content");
 
+
 my $login_user = $jotform->login_user({ username => $reg_user_random, password => $reg_user_random });
 cmp_deeply($login_user, superhashof($cases->{response_wrap}), "Got expected results from login_user() response_wrap");
 cmp_deeply($login_user->{content}, superhashof($cases->{login_user_content}), "Got expected results from login_user() content");
@@ -297,6 +301,10 @@ my $create_form_question = $jotform->create_form_question($form_id, {
 
 cmp_deeply($create_form_question, superhashof($cases->{response_wrap}), "Got expected results from create_form_question response_wrap");
 cmp_deeply($create_form_question->{content}, superhashof($cases->{create_form_question_content}), "Got expected results from create_form_question() content");
+
+my $set_form_properties = $jotform->set_form_properties($form_id, { formWidth => 455 });
+cmp_deeply($set_form_properties, superhashof($cases->{response_wrap}), "Got expected results from set_form_properties respons_wrap");
+cmp_deeply($set_form_properties->{content}, superhashof($cases->{set_form_properties_content}), "Got expected results from set_form_properties() content");
 
 
 
