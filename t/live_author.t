@@ -121,6 +121,14 @@ my $cases = {
 	},
 	set_form_properties_content => {
 	       'formWidth' => re('\d+$'),
+	},
+	create_form_report_content => {
+		'form_id' => re('\d+$'),
+		'status' => 'ENABLED',
+		'list_type' => 'csv',
+		'url' => re('http:'),
+		'id' => re('\d+$'),
+		'title' => 'Test report'
 	}
 
 };
@@ -306,7 +314,9 @@ my $set_form_properties = $jotform->set_form_properties($form_id, { formWidth =>
 cmp_deeply($set_form_properties, superhashof($cases->{response_wrap}), "Got expected results from set_form_properties respons_wrap");
 cmp_deeply($set_form_properties->{content}, superhashof($cases->{set_form_properties_content}), "Got expected results from set_form_properties() content");
 
-
+my $create_form_report = $jotform->create_form_report($form_id, { title => "Test report", list_type => "csv"});
+cmp_deeply($create_form_report, superhashof($cases->{response_wrap}), "Got expected results from create_form_report response_wrap");
+cmp_deeply($create_form_report->{content}, superhashof($cases->{create_form_report_content}), "Got expected results from create_form_report content");
 
 
 done_testing;
