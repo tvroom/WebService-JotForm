@@ -1,5 +1,8 @@
 Revision history for WebService-JotForm
 
+0.018   2014-10-05
+	- add support for create_form_report()
+
 0.018   2014-10-03
 	- added support for set_form_properties()
 	- minor documentation fixes	
