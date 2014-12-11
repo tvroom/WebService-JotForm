@@ -13,13 +13,17 @@ if (not $ENV{RELEASE_TESTING} ) {
     plan skip_all => 'Set $ENV{RELEASE_TESTING} to run release tests.'
 }
 
-my $token_file = "$ENV{HOME}/.webservice-jotform.token";
 my $token;
+if($ENV{'WEBSERVICE-JOTFORM-TOKEN'}) {
+	$token = $ENV{'WEBSERVICE-JOTFORM-TOKEN'};
+} else {
+	my $token_file = "$ENV{HOME}/.webservice-jotform.token";
 
-eval {
-    open(my $fh, '<', $token_file);
-    chomp($token = <$fh>);
-};
+	eval {
+    		open(my $fh, '<', $token_file);
+    		chomp($token = <$fh>);
+	};
+}
 
 if (not $token) {
     plan skip_all => "Cannot read $token_file";
@@ -129,7 +133,10 @@ my $cases = {
 		'url' => re('http:'),
 		'id' => re('\d+$'),
 		'title' => 'Test report'
-	}
+	},
+	create_form_webhook_content => {
+		0 => re('http:'),
+	},
 
 };
 
@@ -317,6 +324,14 @@ cmp_deeply($set_form_properties->{content}, superhashof($cases->{set_form_proper
 my $create_form_report = $jotform->create_form_report($form_id, { title => "Test report", list_type => "csv"});
 cmp_deeply($create_form_report, superhashof($cases->{response_wrap}), "Got expected results from create_form_report response_wrap");
 cmp_deeply($create_form_report->{content}, superhashof($cases->{create_form_report_content}), "Got expected results from create_form_report content");
+
+my $webhooknum = int(rand(10000));
+
+my $create_form_webhook = $jotform->create_form_webhook($form_id, "http://example.com/$webhooknum");
+cmp_deeply($create_form_webhook, superhashof($cases->{response_wrap}), "Got expected results from create_form_webhook response_wrap");
+cmp_deeply($create_form_webhook->{content}, superhashof($cases->{create_form_webhook}), "Got expected results from create_form_webhook content");
+
+print Dumper($jotform->get_form_questions($form_id));
 
 
 done_testing;
