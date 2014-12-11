@@ -14,8 +14,8 @@ if (not $ENV{RELEASE_TESTING} ) {
 }
 
 my $token;
-if($ENV{'WEBSERVICE-JOTFORM-TOKEN'}) {
-	$token = $ENV{'WEBSERVICE-JOTFORM-TOKEN'};
+if($ENV{'WEBSERVICEJOTFORMTOKEN'}) {
+	$token = $ENV{'WEBSERVICEJOTFORMTOKEN'};
 } else {
 	my $token_file = "$ENV{HOME}/.webservice-jotform.token";
 
