@@ -13,3 +13,6 @@ before_install:
     - cpanm Test::Pod # optional dependency
     - cpanm Module::CPANTS::Analyse
     - cpanm Test::Kwalitee # optional dependency
+
+install:
+    - cpanm -v --installdeps --notest --mirror http://cpan.mirrors.travis-ci.org .
