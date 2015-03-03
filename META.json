@@ -34,14 +34,16 @@
             "JSON::MaybeXS" : "0",
             "LWP::UserAgent" : "0",
             "Moo" : "0",
+            "Mozilla::CA" : "0",
             "URI::Escape" : "0",
             "perl" : "5.006"
          }
       },
       "test" : {
          "requires" : {
-            "Test::Deep" : "0",
-            "Test::More" : "0"
+	    "Mozilla::CA" : "0",
+            "Test::Deep"  : "0",
+            "Test::More"  : "0"
          }
       }
    },
