@@ -565,6 +565,22 @@ sub get_form_webhooks {
 	return $self->_get("form/$form_id/webhooks"); 
 }
 
+=head2 create_form_webhook($form_id, $url)
+
+	$jotform->create_form_webhook($form_id, $url);
+
+	Webhooks can be used to send form submission data as an instant notification.  Add a new webhook that receives submission data for a given form
+
+=cut
+
+sub create_form_webhook {
+	my($self, $form_id, $url) = @_;
+	croak "No form id provided to create_form_webhook" if !$form_id;
+	croak "No url provided to create_form_webhook" if !$url;
+
+	return $self->_post("/form/$form_id/webhooks", { webhookURL => $url });
+}
+
 =head2 get_form_submissions($id)
 
 	$jotform->get_form_submissions($id, $params);
