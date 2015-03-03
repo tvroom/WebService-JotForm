@@ -1,5 +1,13 @@
 Revision history for WebService-JotForm
 
+0.020   2015-03-03
+	- Switch to using JSON::MaybeXS instead of deprecated JSON::Any
+	- Add support for TravisCI testing
+	- Add create_form_webhook method
+
+0.019   2014-10-05
+	- add support for create_form_report method
+	
 0.018   2014-10-05
 	- add support for create_form_report()
 
