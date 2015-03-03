@@ -14,10 +14,11 @@ if (not $ENV{RELEASE_TESTING} ) {
 }
 
 my $token;
+my $token_file;
 if($ENV{'WEBSERVICEJOTFORMTOKEN'}) {
 	$token = $ENV{'WEBSERVICEJOTFORMTOKEN'};
 } else {
-	my $token_file = "$ENV{HOME}/.webservice-jotform.token";
+	$token_file = "$ENV{HOME}/.webservice-jotform.token";
 
 	eval {
     		open(my $fh, '<', $token_file);
