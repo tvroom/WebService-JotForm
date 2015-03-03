@@ -17,13 +17,13 @@ WriteMakefile(
     BUILD_REQUIRES => {
     },
     TEST_REQUIRES => {
-        'Test::More' => 0,
-	'Test::Deep' => 0,
+        'Test::More'	=> 0,
+		'Test::Deep' 	=> 0,
     },
     PREREQ_PM => {
-	'Carp' 			=> 0,
-	'Moo'  			=> 0,
-	'JSON::Any' 		=> 0,
+	'Carp' 				=> 0,
+	'Moo'  				=> 0,
+	'JSON::MaybeXS' 	=> 0,
 	'LWP::UserAgent' 	=> 0,
 	'URI::Escape'		=> 0,
     },

@@ -3,7 +3,7 @@ package WebService::JotForm;
 use strict;
 use warnings FATAL => 'all';
 use Moo;
-use JSON::Any;
+use JSON::MaybeXS;
 use LWP::UserAgent;
 use URI::Escape qw(uri_escape);
 use Carp qw(croak);
@@ -16,7 +16,7 @@ Support for create, update, and delete operations are beginning to be added in t
 
 =head1 VERSION
 
-Version 0.018
+Version 0.019
 
 =head1 SYNOPSIS
 	
@@ -53,14 +53,14 @@ More information on tokens is available in the L<JotForm API Documentation|http:
 
 =cut
 
-our $VERSION = '0.018';
+our $VERSION = '0.019';
 
 has 'apiKey'  		=> ( is => 'ro', required => 1);
 has 'apiBase' 		=> ( is => 'ro', default => 'https://api.jotform.com');
 has 'apiVersion'	=> ( is => 'ro', default => 'v1');
 has 'agent'   		=> ( is => 'rw'); # Must act like LWP::UserAgent
 
-my $json = JSON::Any->new;
+my $json = JSON::MaybeXS->new;
 
 sub BUILD {
 	my ($self) = @_;

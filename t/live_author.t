@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Test::More;
 use WebService::JotForm;
-use JSON::Any;
+use JSON::MaybeXS;
 use Data::Dumper;
 use Test::Deep;
 

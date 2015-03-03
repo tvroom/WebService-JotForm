@@ -31,7 +31,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "JSON::Any" : "0",
+            "JSON::MaybeXS" : "0",
             "LWP::UserAgent" : "0",
             "Moo" : "0",
             "URI::Escape" : "0",
@@ -58,5 +58,5 @@
          "web" : "http://github.com/tvroom/WebService-JotForm"
       }
    },
-   "version" : "0.018"
+   "version" : "0.019"
 }
